@@ -12,7 +12,11 @@ function loadLang(lang) {
     .then(data => {
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (data[key]) el.innerText = data[key];
+        if (data[key]) {
+          const temp = document.createElement('div');
+          temp.innerHTML = data[key];
+          el.innerHTML = temp.innerHTML;
+        }
       });
     });
 }
