@@ -1,4 +1,4 @@
-let currentLang = 'pl';
+let currentLang = 'en';
 
 function setLang(lang) {
   currentLang = lang;
