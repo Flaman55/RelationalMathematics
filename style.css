@@ -11,15 +11,6 @@ body {
   overflow-x: hidden;
 }
 
-nav {
-  background-color: #000;
-  padding: 1em;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
 nav a {
   color: #ccc;
   margin: 0 1em;
@@ -31,9 +22,57 @@ nav a:hover {
   color: #fff;
 }
 
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #000;
+  padding: 1em;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.lang-switch {
+  display: flex;
+  gap: 0.5em;
+}
+
+.lang-switch button {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #eee;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.lang-switch button:hover {
+  transform: scale(1.2);
+  color: #fff;
+}
+
 .section {
   padding: 6em 2em;
   text-align: center;
+}
+
+.section h1,
+.section h2,
+.section p {
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.section h1 {
+  font-size: 2.4rem;
+}
+
+.section p {
+  font-size: 1.1rem;
 }
 
 .section.dark {
@@ -128,6 +167,28 @@ a:hover {
   max-width: 700px;
   margin: 0 auto 1.2em auto;
 }
+
+.structure-divider {
+  margin: 3em auto;
+  height: 3px;
+  width: 220px;
+  border-radius: 2px;
+  background: linear-gradient(to right, #ffcc33, #ffffff44, #33ccff);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+  animation: dividerPulse 6s infinite ease-in-out;
+}
+
+@keyframes dividerPulse {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.1);
+  }
+}
+
 
 /* Puls rytmiczny symboli */
 @keyframes pulseSymbol {

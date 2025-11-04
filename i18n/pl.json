@@ -1,0 +1,40 @@
+{
+  "meta-title": "Matematyka Relacyjna – Cztery Filary Porządku Liczbowego",
+
+  "nav-congruences": "Kongruencje",
+  "nav-elimination": "Eliminacja",
+  "nav-structure": "Struktura",
+  "nav-pillars": "Cztery Filary",
+  "nav-tools": "Narzędzia",
+  "nav-contact": "Kontakt",
+
+  "classic-title": "Kongruencje: Początek iluzji",
+  "classic-text-1": "W klasycznej arytmetyce kongruencje są resztami. Ale czy reszta to wszystko?",
+  "classic-text-2": "Zamiast wartości — pomyśl o rytmie. Zamiast liczby — o cyklu.",
+
+  "elimination-title": "Eliminacja jako rytm",
+  "elimination-text-1": "Liczby nie są wybrane — są <em>nieusunięte</em>. To, co pozostało po interferencji, jest tym, co przetrwało.",
+  "elimination-text-2": "To nie konstrukcja. To oczyszczenie.",
+
+  "structure-text-1": "Wartość nie istnieje. Istnieje relacja. Każde S tworzy własny rytm, a U — jedynie skalę poznawczą.",
+  "structure-text-2": "Gdy rytmy nie eliminują — powstaje liczba pierwsza.",
+
+  "pillars-title": "Cztery Filary Porządku Liczbowego",
+  "pillar-1": "Eliminacja",
+  "pillar-2": "Gęstość",
+  "pillar-3": "Rezonans",
+  "pillar-4": "Fala",
+  "pillar-aspects": "Strukturalne aspekty pierwszości",
+  "math-core": "Matematyka Strukturalna Relacyjna",
+  "math-core-sub": "Fundament Porządku Liczbowego",
+
+  "tools-title": "Narzędzia",
+  "tools-text-1": "Zobacz kod symulacji eliminacji w przestrzeni S^S·U.",
+  "tools-link-1": "Repozytorium GitHub",
+  "tools-link-2": "Publikacje",
+
+  "manifest-line-1": "Rytm jest jeden.",
+  "manifest-line-2": "Liczby są wiele.",
+
+  "footer-rights": "© 2025 Flamandzki. Wszelkie prawa zastrzeżone."
+}

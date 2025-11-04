@@ -1,0 +1,40 @@
+{
+  "meta-title": "Relational Mathematics – Four Pillars of Numerical Order",
+
+  "nav-congruences": "Congruences",
+  "nav-elimination": "Elimination",
+  "nav-structure": "Structure",
+  "nav-pillars": "Four Pillars",
+  "nav-tools": "Tools",
+  "nav-contact": "Contact",
+
+  "classic-title": "Congruences: The Beginning of Illusion",
+  "classic-text-1": "In classical arithmetic, congruences are remainders. But is the remainder everything?",
+  "classic-text-2": "Instead of value — think of rhythm. Instead of number — think of cycle.",
+
+  "elimination-title": "Elimination as Rhythm",
+  "elimination-text-1": "Numbers are not chosen — they are <em>unremoved</em>. What remains after interference is what survives.",
+  "elimination-text-2": "It is not construction. It is purification.",
+
+  "structure-text-1": "Value does not exist. Relation does. Each S creates its own rhythm, and U defines only the cognitive scale.",
+  "structure-text-2": "When rhythms do not eliminate — a prime number emerges.",
+
+  "pillars-title": "Four Pillars of Numerical Order",
+  "pillar-1": "Elimination",
+  "pillar-2": "Density",
+  "pillar-3": "Resonance",
+  "pillar-4": "Wave",
+  "pillar-aspects": "Structural aspects of primality",
+  "math-core": "Relational Structural Mathematics",
+  "math-core-sub": "Foundation of Numerical Order",
+
+  "tools-title": "Tools",
+  "tools-text-1": "Explore the elimination simulation code within the S^S·U space.",
+  "tools-link-1": "GitHub Repository",
+  "tools-link-2": "Publications",
+
+  "manifest-line-1": "The rhythm is one.",
+  "manifest-line-2": "The numbers are many.",
+
+  "footer-rights": "© 2025 Flamandzki. All rights reserved."
+}

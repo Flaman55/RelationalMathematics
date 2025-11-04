@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Matematyka Relacyjna – Cztery Filary Porządku Liczbowego</title>
+  <title data-i18n="meta-title">Matematyka Relacyjna – Cztery Filary Porządku Liczbowego</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -11,26 +11,30 @@
 
     <!-- Nawigacja -->
     <nav>
-      <a href="#classic">Kongruencje</a>
-      <a href="#eliminacja">Eliminacja</a>
-      <a href="#struktura">Struktura</a>
-      <a href="#pillars">Cztery Filary</a>
-      <a href="#tools">Narzędzia</a>
-      <a href="#contact">Kontakt</a>
+      <a href="#classic" data-i18n="nav-congruences">Kongruencje</a>
+      <a href="#eliminacja" data-i18n="nav-elimination">Eliminacja</a>
+      <a href="#struktura" data-i18n="nav-structure">Struktura</a>
+      <a href="#pillars" data-i18n="nav-pillars">Cztery Filary</a>
+      <a href="#tools" data-i18n="nav-tools">Narzędzia</a>
+      <a href="#contact" data-i18n="nav-contact">Kontakt</a>
+      <div class="lang-switch">
+        <button onclick="setLang('pl')">🇵🇱</button>
+        <button onclick="setLang('en')">🇬🇧</button>
+      </div>
     </nav>
 
     <!-- Sekcja 1: Klasyczne spojrzenie -->
     <section id="classic" class="section dark">
-      <h1>Kongruencje: Początek iluzji</h1>
-      <p>W klasycznej arytmetyce kongruencje są resztami. Ale czy reszta to wszystko?</p>
-      <p>Zamiast wartości — pomyśl o rytmie. Zamiast liczby — o cyklu.</p>
+      <h1 data-i18n="classic-title">Kongruencje: Początek iluzji</h1>
+      <p data-i18n="classic-text-1">W klasycznej arytmetyce kongruencje są resztami. Ale czy reszta to wszystko?</p>
+      <p data-i18n="classic-text-2">Zamiast wartości — pomyśl o rytmie. Zamiast liczby — o cyklu.</p>
     </section>
 
     <!-- Sekcja 2: Eliminacja -->
     <section id="eliminacja" class="section bright">
-      <h1>Eliminacja jako rytm</h1>
-      <p>Liczby nie są wybrane — są <em>nieusunięte</em>. To, co pozostało po interferencji, jest tym, co przetrwało.</p>
-      <p>To nie konstrukcja. To oczyszczenie.</p>
+      <h1 data-i18n="elimination-title">Eliminacja jako rytm</h1>
+      <p data-i18n="elimination-text-1">Liczby nie są wybrane — są <em>nieusunięte</em>. To, co pozostało po interferencji, jest tym, co przetrwało.</p>
+      <p data-i18n="elimination-text-2">To nie konstrukcja. To oczyszczenie.</p>
     </section>
 
     <!-- Sekcja 3: Struktura -->
@@ -38,49 +42,49 @@
       <h1 class="structure-title">
         <span class="symbol-S large">S</span><sup><span class="symbol-S">S</span></sup> · <span class="symbol-U large">U</span>
       </h1>
-      <p class="structure-intro">
+      <p class="structure-intro" data-i18n="structure-text-1">
         Wartość nie istnieje. Istnieje relacja.
         Każde <span class="symbol-S">S</span> tworzy własny rytm,
         a <span class="symbol-U">U</span> — jedynie skalę poznawczą.
       </p>
-      <p class="structure-intro">
+      <p class="structure-intro" data-i18n="structure-text-2">
         Gdy rytmy nie eliminują — powstaje liczba pierwsza.
       </p>
+      <div class="structure-divider"></div>
     </section>
-
 
     <!-- Sekcja 4: Filary -->
     <section id="pillars" class="section bright">
-      <h2>Cztery Filary Porządku Liczbowego</h2>
+      <h2 data-i18n="pillars-title">Cztery Filary Porządku Liczbowego</h2>
       <div class="tree-container">
         <pre>
-      ┌───── <a href="pillars/eliminacja.html">Eliminacja</a>
-      ├───── <a href="pillars/gestosc.html">Gęstość</a>
-      ├───── <a href="pillars/rezonans.html">Rezonans</a>
-      ├───── <a href="pillars/fala.html">Fala</a>
-  ┌───┴─── Strukturalne aspekty pierwszości
+      ┌───── <a href="pillars/eliminacja.html" data-i18n="pillar-1">Eliminacja</a>
+      ├───── <a href="pillars/gestosc.html" data-i18n="pillar-2">Gęstość</a>
+      ├───── <a href="pillars/rezonans.html" data-i18n="pillar-3">Rezonans</a>
+      ├───── <a href="pillars/fala.html" data-i18n="pillar-4">Fala</a>
+  ┌───┴─── <span data-i18n="pillar-aspects">Strukturalne aspekty pierwszości</span>
   │
 ──┴─────────────────────────────────────────────
-   <strong>Matematyka Strukturalna Relacyjna</strong>
-   (Fundament Porządku Liczbowego)
+   <strong data-i18n="math-core">Matematyka Strukturalna Relacyjna</strong>
+   (<span data-i18n="math-core-sub">Fundament Porządku Liczbowego</span>)
         </pre>
       </div>
     </section>
 
     <!-- Sekcja 5: Narzędzia -->
     <section id="tools" class="section dark">
-      <h2>Narzędzia</h2>
-      <p>Zobacz kod symulacji eliminacji w przestrzeni S<sup>S</sup>·U.</p>
+      <h2 data-i18n="tools-title">Narzędzia</h2>
+      <p data-i18n="tools-text-1">Zobacz kod symulacji eliminacji w przestrzeni S<sup>S</sup>·U.</p>
       <p>
-        <a href="https://github.com/arturFlaman/RelationalMathematics" target="_blank">Repozytorium GitHub</a> |
-        <a href="https://millenniumchecked.org/flamandzki-one-rhythm.html" target="_blank">Publikacje</a>
+        <a href="https://github.com/arturFlaman/RelationalMathematics" target="_blank" data-i18n="tools-link-1">Repozytorium GitHub</a> |
+        <a href="https://millenniumchecked.org/flamandzki-one-rhythm.html" target="_blank" data-i18n="tools-link-2">Publikacje</a>
       </p>
     </section>
 
     <!-- Sekcja 6: Manifest -->
     <section class="section center bright" style="padding: 5em 2em;">
-      <h1 style="font-size: 2.8em;">The rhythm is one.</h1>
-      <h2 style="font-weight: 300;">The numbers are many.</h2>
+      <h1 style="font-size: 2.8em;" data-i18n="manifest-line-1">The rhythm is one.</h1>
+      <h2 style="font-weight: 300;" data-i18n="manifest-line-2">The numbers are many.</h2>
       <p style="margin-top: 1em;">— Flamandzki Artur</p>
     </section>
 
@@ -90,11 +94,12 @@
         <a href="mailto:flamandzki.artur@gmail.com">flamandzki.artur@gmail.com</a> |
         <a href="https://www.linkedin.com/in/artur-flamandzki-74046918b/" target="_blank">LinkedIn</a>
       </p>
-      <p style="font-size: 0.9em; color: #888;">
+      <p style="font-size: 0.9em; color: #888;" data-i18n="footer-rights">
         © 2025 Flamandzki. Wszelkie prawa zastrzeżone.
       </p>
     </footer>
 
   </div>
+  <script src="js/i18n.js"></script>
 </body>
 </html>
