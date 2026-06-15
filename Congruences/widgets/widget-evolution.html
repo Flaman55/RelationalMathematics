@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f4f4;color:#222;font:13px/1.4 system-ui,sans-serif;padding:10px 10px 12px}
+html,body{height:auto}
+
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.panel{border-radius:6px;border:1px solid #ddd;padding:10px 12px;background:#ececec;min-height:160px}
+.panel.curr{border-color:#b8952a;background:#fdf8ec}
+.panel.faded{opacity:.65}
+.panel-title{font-size:10px;font-weight:700;letter-spacing:.07em;color:#888;text-transform:uppercase;margin-bottom:7px}
+.panel.curr .panel-title{color:#b8952a}
+
+.pills{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px}
+.pill{background:#dce8f4;border:1px solid #b0c8e0;border-radius:4px;padding:1px 6px;font-size:11px;font-weight:600;color:#335}
+.pill.new{background:#b8952a;border-color:#b8952a;color:#fff}
+.pill.more{background:#ececec;border-color:#ddd;color:#999;font-style:italic}
+
+.formula{font-size:11px;color:#555;margin-bottom:6px;line-height:1.6}
+.formula strong{color:#b8952a}
+.formula .fv{color:#2266aa;font-weight:600}
+.new-primes-line{font-size:11px;margin-bottom:6px;color:#555}
+.new-primes-line span{color:#b8952a;font-weight:700}
+.next-range-line{font-size:10px;color:#888;margin-bottom:7px}
+.next-range-line strong{color:#2266aa}
+
+.bar-wrap{margin-top:4px}
+.bar-track{height:12px;border-radius:3px;overflow:hidden;display:flex;position:relative;width:240px}
+.bar-gray{background:#ccc;flex-shrink:0}
+.bar-blue{background:#5a9fd4;flex:1}
+.bar-marker{position:absolute;top:0;bottom:0;width:2px;background:#b8952a}
+.bar-labels{display:flex;font-size:9px;color:#999;margin-top:3px;position:relative;height:13px;width:240px}
+.bar-lbl{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.bar-lbl.l0{transform:none}
+.bar-lbl.lmax{transform:translateX(-100%)}
+
+.growth{display:inline-block;background:#dce8f4;border:1px solid #5a9fd4;border-radius:4px;
+  font-size:10px;color:#555;padding:2px 7px;margin-top:6px}
+.growth strong{color:#b8952a}
+
+.nav{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:4px}
+.nav-btn{background:#e8e8e8;border:1px solid #ccc;border-radius:6px;
+  color:#444;font-size:15px;width:34px;height:34px;cursor:pointer;
+  transition:background .15s,border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0}
+.nav-btn:hover:not(:disabled){background:#fdf0d0;border-color:#b8952a;color:#b8952a}
+.nav-btn:disabled{opacity:.25;cursor:default}
+.nav-btn.active-play{background:#fdf0d0;border-color:#b8952a;color:#b8952a}
+.step-info{font-size:12px;color:#888;min-width:76px;text-align:center}
+
+@media(max-width:500px){
+  .panels{grid-template-columns:1fr}
+  .panel.faded{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="panels">
+  <div class="panel faded" id="panel-prev"></div>
+  <div class="panel curr"  id="panel-curr"></div>
+</div>
+<div class="nav">
+  <button class="nav-btn" id="btn-reset"  title="Reset">&#8676;</button>
+  <button class="nav-btn" id="btn-prev"   title="Wstecz">&#9664;</button>
+  <button class="nav-btn" id="btn-play"   title="Dalej">&#9654;</button>
+  <button class="nav-btn" id="btn-next"   title="Nastepny">&#8594;</button>
+  <span class="step-info" id="step-info"></span>
+</div>
+
+<script>
+function buildSteps(){
+  const LIMIT = 2000000;
+  const isp = new Uint8Array(LIMIT+1).fill(1); isp[0]=isp[1]=0;
+  for(let i=2;i*i<=LIMIT;i++) if(isp[i]) for(let j=i*i;j<=LIMIT;j+=i) isp[j]=0;
+
+  const steps=[];
+  let pMax=2, basis=[2];
+  steps.push({pMax:2,range:4,newPrimes:[],basis:[2],prevPMax:null,foundIn:4});
+
+  for(let k=0;k<8;k++){
+    const lo=pMax, hi=2*pMax;
+    if(hi>LIMIT) break;
+    const found=[];
+    for(let n=lo+1;n<=hi;n++) if(isp[n]) found.push(n);
+    if(!found.length) break;
+    const prev=pMax;
+    pMax=found[found.length-1];
+    basis=[...basis,...found];
+    steps.push({prevPMax:prev,foundIn:hi,newPrimes:found,pMax,range:2*pMax,basis:[...basis]});
+  }
+  return steps;
+}
+
+const STEPS = buildSteps();
+const MAX_STEP = STEPS.length - 1;
+let step = 1;
+let playDir = 0;
+let playTimer = null;
+
+function getLang(){
+  try{ return window.parent.document.documentElement.lang||'pl'; }catch(e){ return 'pl'; }
+}
+
+function pillsHTML(basis, newSet, isCurr){
+  const MAX_EXISTING = 14;
+  const existing = basis.filter(p=>!newSet.has(p));
+  let out = '';
+  if(existing.length <= MAX_EXISTING){
+    existing.forEach(p=>{ out+=`<span class="pill">${p}</span>`; });
+  } else {
+    existing.slice(0,6).forEach(p=>{ out+=`<span class="pill">${p}</span>`; });
+    out+=`<span class="pill more">+${existing.length-6} ...</span>`;
+  }
+  newSet.forEach(p=>{ out+=`<span class="pill${isCurr?' new':''}">${p}</span>`; });
+  return out;
+}
+
+function renderBar(el, foundIn, prevPMax, newPrimes){
+  const W=240;
+  const gw=Math.round(prevPMax/foundIn*W);
+  let markers='';
+  newPrimes.forEach(p=>{
+    const x=Math.round(p/foundIn*W);
+    markers+=`<div class="bar-marker" style="left:${x}px"></div>`;
+  });
+  el.innerHTML=
+    `<div class="bar-wrap">`+
+      `<div style="position:relative;width:${W}px">`+
+        `<div class="bar-track">`+
+          `<div class="bar-gray" style="width:${gw}px"></div>`+
+          `<div class="bar-blue"></div>`+
+        `</div>`+
+        markers+
+      `</div>`+
+      `<div class="bar-labels">`+
+        `<span class="bar-lbl l0">0</span>`+
+        `<span class="bar-lbl" style="left:${gw}px">${prevPMax}</span>`+
+        `<span class="bar-lbl lmax" style="left:${W}px">${foundIn}</span>`+
+      `</div>`+
+    `</div>`;
+}
+
+function renderPanel(el, k, isCurr){
+  const s=STEPS[k];
+  if(!s){el.innerHTML='';return;}
+  const isPL=getLang()==='pl';
+  const kLabel=k===0?'START':`${isPL?'KROK':'STEP'} ${k}`;
+
+  const newSet=new Set(s.newPrimes);
+  let html=`<div class="panel-title">${kLabel}</div>`+
+    `<div class="pills">${pillsHTML(s.basis,newSet,isCurr)}</div>`;
+
+  if(k===0){
+    html+=`<div class="formula">${isPL?'Zasieg startowy':'Initial range'}: <span class="fv">2 x 2 = <strong>4</strong></span></div>`;
+    el.innerHTML=html;
+    const bd=document.createElement('div');
+    renderBar(bd,4,2,[]);
+    el.appendChild(bd);
+    return;
+  }
+
+  const {prevPMax,foundIn,newPrimes,pMax,range}=s;
+  const nLabel=isPL?'Nowe pierwsze':'New primes';
+  const nrLabel=isPL?'Nowy zasieg':'New range';
+  const cnt=newPrimes.length;
+  const cLabel=isPL
+    ?`+<strong>${cnt}</strong> now${cnt===1?'a':'e'}`
+    :`+<strong>${cnt}</strong> new`;
+
+  html+=
+    `<div class="formula">2 x P<sub>max</sub> = 2 x <span class="fv">${prevPMax.toLocaleString()}</span> = <strong>${foundIn.toLocaleString()}</strong></div>`+
+    `<div class="new-primes-line">${nLabel}: `+
+      (newPrimes.length<=12
+        ? newPrimes.map(p=>`<span>${p.toLocaleString()}</span>`).join(' · ')
+        : newPrimes.slice(0,5).map(p=>`<span>${p}</span>`).join(' · ')+
+          ` <span style="color:#bbb">... +${newPrimes.length-5}</span>`)+
+    `</div>`+
+    `<div class="next-range-line">${nrLabel}: 2 x <strong>${pMax.toLocaleString()}</strong> = <strong>${range.toLocaleString()}</strong></div>`+
+    `<div class="growth">${cLabel}</div>`;
+
+  el.innerHTML=html;
+  const bd=document.createElement('div');
+  renderBar(bd,foundIn,prevPMax,newPrimes);
+  el.appendChild(bd);
+}
+
+function render(){
+  const isPL=getLang()==='pl';
+  renderPanel(document.getElementById('panel-prev'),step-1,false);
+  renderPanel(document.getElementById('panel-curr'),step,true);
+  document.getElementById('btn-prev').disabled=step<=1;
+  document.getElementById('btn-next').disabled=step>=MAX_STEP;
+  document.getElementById('btn-reset').disabled=step<=1;
+  document.getElementById('step-info').textContent=`${isPL?'krok':'step'} ${step} / ${MAX_STEP}`;
+  document.getElementById('btn-play').classList.toggle('active-play',playDir===1);
+  document.getElementById('btn-play').innerHTML=playDir===1?'&#9646;&#9646;':'&#9654;';
+  fitParent();
+}
+
+function stopPlay(){ clearInterval(playTimer); playTimer=null; playDir=0; }
+function startPlay(){
+  stopPlay();
+  if(step>=MAX_STEP) step=1;
+  playDir=1;
+  playTimer=setInterval(()=>{
+    step++;
+    if(step>=MAX_STEP){ step=MAX_STEP; stopPlay(); }
+    render();
+  },1200);
+  render();
+}
+
+document.getElementById('btn-play').addEventListener('click',()=>{
+  playDir===1?(stopPlay(),render()):startPlay();
+});
+document.getElementById('btn-prev').addEventListener('click',()=>{ stopPlay(); if(step>1){step--;render();} });
+document.getElementById('btn-next').addEventListener('click',()=>{ stopPlay(); if(step<MAX_STEP){step++;render();} });
+document.getElementById('btn-reset').addEventListener('click',()=>{ stopPlay(); step=1; render(); });
+
+function fitParent(){
+  if(!window.frameElement)return;
+  window.frameElement.style.height='10px';
+  requestAnimationFrame(()=>{
+    window.frameElement.style.height=document.documentElement.scrollHeight+'px';
+  });
+}
+
+render();
+try{
+  new MutationObserver(()=>render())
+    .observe(window.parent.document.documentElement,{attributes:true,attributeFilter:['lang']});
+}catch(e){}
+</script>
+</body>
+</html>

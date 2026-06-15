@@ -284,3 +284,211 @@ a:hover {
   z-index: 1;
   pointer-events: none;
 }
+
+/* --- Obrazy w sekcjach --- */
+
+.section-img {
+  display: block;
+  max-width: 820px;
+  width: 100%;
+  margin: 2.5em auto;
+  border-radius: 4px;
+  opacity: 0.88;
+}
+
+.section-img.wide {
+  max-width: 100%;
+  border-radius: 2px;
+}
+
+.section.bright .section-img {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  opacity: 1;
+}
+
+/* --- Split: dwie grafiki jako jedno pęknięte w pół --- */
+
+.split-pair {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  margin: 2.5em 0 0;
+  gap: 0;
+}
+
+.split-half {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+.split-half img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.split-half.right img {
+  object-position: left center;
+}
+
+.split-crack {
+  width: 2px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #2a2a2a 15%,
+    #555 45%,
+    #888 50%,
+    #555 55%,
+    #2a2a2a 85%,
+    transparent 100%
+  );
+  position: relative;
+}
+
+.split-crack::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: #aaa;
+  border-radius: 50%;
+  box-shadow: 0 0 12px 4px rgba(180,180,180,0.15);
+}
+
+.split-label {
+  font-size: 0.75rem;
+  color: #2e2e2e;
+  text-align: center;
+  padding: 0.5em 1em;
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  margin: 0;
+  min-height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .split-pair {
+    flex-direction: column;
+  }
+  .split-crack {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #555, transparent);
+  }
+  .split-half img {
+    height: 220px;
+  }
+}
+
+/* --- Podpis pod grafiką --- */
+
+.img-caption {
+  font-size: 0.85rem;
+  color: #3a3a3a;
+  max-width: 820px;
+  margin: 0.8em auto 0;
+  line-height: 1.7;
+  font-family: 'Georgia', serif;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.section.bright .img-caption {
+  color: #888;
+}
+
+/* --- Pytanie-haczyk (ciemne sekcje) --- */
+
+.question {
+  font-style: italic;
+  font-size: 1.15rem;
+  color: #aaa;
+  max-width: 680px;
+  margin: 2em auto 0;
+  line-height: 1.7;
+  border-left: 2px solid #2a2a2a;
+  padding-left: 1.2em;
+  text-align: left;
+}
+
+.section.bright .question {
+  color: #444;
+  border-left-color: #ccc;
+}
+
+/* --- Pęknięcie (faktoryzacja — obserwacja klasyczna) --- */
+
+.crack {
+  font-size: 1rem;
+  color: #555;
+  max-width: 680px;
+  margin: 2.5em auto 0;
+  line-height: 1.8;
+  padding: 1.2em 1.4em;
+  border: 1px solid #1e1e1e;
+  border-radius: 4px;
+  text-align: left;
+  background: #0d0d0d;
+}
+
+/* --- Zamknięcie narracyjne (jasne sekcje) --- */
+
+.closing {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  max-width: 680px;
+  margin: 2.5em auto 0;
+  line-height: 1.7;
+  padding-top: 1.5em;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+
+/* --- Sekcja pobierania --- */
+
+.download-section h2 {
+  color: #ccc;
+  font-size: 1.8rem;
+  margin-bottom: 0.8em;
+}
+
+.download-section p {
+  color: #666;
+  margin-bottom: 0;
+}
+
+.download-btn {
+  display: inline-block;
+  margin-top: 2em;
+  padding: 0.9em 2em;
+  border: 1px solid #2a2a2a;
+  border-radius: 3px;
+  color: #66ccff;
+  text-decoration: none;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.download-btn:hover {
+  border-color: #66ccff;
+  color: #99ddff;
+  text-decoration: none;
+}

@@ -4,97 +4,162 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="kong-title">Kongruencje – Wejście do Struktury</title>
-
   <link rel="stylesheet" href="../style.css" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
 </head>
 
 <body>
+<div class="container">
 
-  <!-- Kontener -->
-  <div class="container">
+  <!-- Nawigacja -->
+  <nav>
+    <a href="../index.html" data-i18n="nav-home">Strona główna</a>
+    <div style="display:flex; gap:0.2em; flex-wrap:wrap;">
+      <a href="#dark1"  data-i18n="nav-classic">Klasycznie</a>
+      <a href="#light1" data-i18n="nav-rhythm">Rytm</a>
+      <a href="#dark2"  data-i18n="nav-sieve">Sito</a>
+      <a href="#light2" data-i18n="nav-emergence">Wyłanianie</a>
+    </div>
+    <div class="lang-switch">
+      <button onclick="setLang('pl')">🇵🇱</button>
+      <button onclick="setLang('en')">🇬🇧</button>
+    </div>
+  </nav>
 
-    <!-- Nawigacja -->
-    <nav>
-      <a href="../index.html" data-i18n="nav-home">Strona główna</a>
-      <a href="#intro" data-i18n="nav-intro">Wprowadzenie</a>
-      <a href="#classic" data-i18n="nav-classic">Klasyczne ujęcie</a>
-      <a href="#transition" data-i18n="nav-transition">Przejście</a>
-      <a href="#deep" data-i18n="nav-deep">Struktura</a>
+  <!-- ═══ HERO (ciemna) ═══ -->
+  <header class="hero section dark">
+    <h1 data-i18n="hero-title">Kongruencje: Złudzenie Reszty</h1>
+    <p data-i18n="hero-sub">
+      12 ≡ 2 (mod 5). To zdanie mówi coś o liczbie 12 — czy o tym, jak na nią patrzysz?
+    </p>
+    <p data-i18n="hero-sub2">
+      Zanim odpowiesz, cofnij się do podstaw. Tam zaczyna się pęknięcie.
+    </p>
+    <img
+      src="img/00_hero_pekniecie.png"
+      alt="Kongruencje — wizualizacja"
+      class="section-img"
+      style="max-width: 860px; opacity: 0.92; margin-top: 2.5em;"
+    />
+    <p class="crack" data-i18n="dark2-crack">
+      Jest w tym coś dziwnego. Klasyczna teoria wie, że liczby pierwsze są atomami
+      faktoryzacji — każda liczba złożona rozkłada się na nie jednoznacznie.
+      Wie też, że pierwsza to taka, której nic nie dzieli.
+      Ale nigdy nie pyta, dlaczego oba te opisy dotyczą dokładnie tych samych liczb.
+      Używa obu naprzemiennie, jakby były oddzielnymi narzędziami.
+      A może to dwa widoki jednego mechanizmu?
+    </p>
+  </header>
 
-      <div class="lang-switch">
-        <button onclick="setLang('pl')">🇵🇱</button>
-        <button onclick="setLang('en')">🇬🇧</button>
+  <!-- ═══ CIEMNA 1 — Rytm i pytanie ═══ -->
+  <section id="dark1" class="section dark">
+    <p class="question" data-i18n="dark1-q">
+      Ale co jeśli ta reszta należy do piątki — nie do siedemnastki?
+    </p>
+  </section>
+
+  <!-- ═══ JASNA 1 — Wyłanianie ═══ -->
+  <section id="light1" class="section bright">
+    <h2 data-i18n="light2-title">Pierwsze się nie ukrywają. Wyłaniają się.</h2>
+    <p data-i18n="light2-p1">
+      Nałóż rytm mod 2 — eliminuje liczby parzyste.
+      Nałóż mod 3 — eliminuje wielokrotności trójki.
+      Każdy rytm dociera w swoje miejsca na osi liczbowej.
+    </p>
+    <div style="display:flex; gap:2em; align-items:flex-start; margin:2.5em 0;">
+      <div style="flex:1;">
+        <img
+          src="img/05_fale_pierwszych.png"
+          style="width:100%; border-radius:4px; box-shadow:0 4px 24px rgba(0,0,0,0.12);"
+          alt="Fale eliminacyjne – gdzie żaden cykl nie trafia"
+        />
       </div>
-    </nav>
-
-    <!-- Sekcja: Hero -->
-    <header class="hero">
-      <h1 data-i18n="kong-header">Congruences: The Beginning of Illusion</h1>
-      <p data-i18n="kong-sub">
-        In classical arithmetic, congruences are remainders. But is the remainder everything?
-      </p>
-      <p data-i18n="kong-sub-2">
-        Instead of value think rhythm. Instead of number think cycle.
-      </p>
-    </header>
-
-    <!-- Sekcja: Wprowadzenie -->
-    <section id="intro" class="section bright">
-      <h2 data-i18n="kong-intro-title">Dlaczego kongruencje są bramą?</h2>
-      <p data-i18n="kong-intro-text">
-        Tutaj wstawimy krótki miękki opis zachęcający czytelnika do dalszego odkrywania.
-      </p>
-    </section>
-
-    <!-- Sekcja: Klasyczne ujęcie -->
-    <section id="classic" class="section dark">
-      <h2 data-i18n="kong-classic-title">Klasyczna teoria kongruencji</h2>
-      <p data-i18n="kong-classic-text">
-        Tu pojawią się klasyczne definicje, przykłady i intuicje liczbowe, jeszcze bez struktury.
-      </p>
-
-      <div class="placeholder-img" data-i18n="kong-classic-img">
-        (Miejsce na grafikę modularną)
+      <div style="flex:1;">
+        <img
+          src="img/04_cykl_eliminacyjny.png"
+          style="width:100%; border-radius:4px; box-shadow:0 4px 24px rgba(0,0,0,0.12);"
+          alt="Cykl eliminacyjny"
+        />
       </div>
-    </section>
+    </div>
+    <p data-i18n="light2-p2">
+      Miejsca, do których nie dotarł żaden rytm — są pierwsze.
+      Nie dlatego że są specjalne.
+      Dlatego że żaden cykl nie miał tam co robić.
+    </p>
+  </section>
 
-    <!-- Sekcja: Przejście -->
-    <section id="transition" class="section bright">
-      <h2 data-i18n="kong-transition-title">Co jeśli reszta to za mało?</h2>
-      <p data-i18n="kong-transition-text">
-        To jest sekcja przejściowa, w której zaczniemy odchylać klasyczną perspektywę, ale nadal po ludzku.
-      </p>
+  <!-- ═══ CIEMNA 2 — Wheel sieve: geometria klasyczna ═══ -->
+  <section id="dark2" class="section dark">
+    <h2 data-i18n="dark2-title">Ten sam algorytm. Nowy widok.</h2>
+    <p data-i18n="dark2-p1">
+      Nikt nic nie zmienił. Te same liczby, te same wielokrotności, ta sama wykreślanka.
+      Tylko kształt przestrzeni jest inny. I nagle coś, czego na prostej osi nie było widać — zaczyna być widoczne.
+    </p>
+    <img
+      src="img/07_wheel_sieve.png"
+      class="section-img"
+      style="max-width: 480px;"
+      data-i18n-alt="dark2-img-alt"
+      alt="Sito Eratostenesa w układzie kołowym"
+    />
+    <p data-i18n="dark2-p2">
+      A jednak coś widać inaczej. Liczby pierwsze pojawiają się
+      w tych samych miejscach co 30 pozycji dalej — bo tyle trwa jeden pełny cykl wszystkich trzech rytmów razem.
+      Co pełne koło, ten sam wzorzec.
+      Algorytm tego nie zakłada. Wzorzec po prostu jest.
+    </p>
+    <p class="question" data-i18n="dark2-q">
+      To tylko zbieżność — czy to mówi coś o strukturze samej przestrzeni liczb?
+    </p>
+  </section>
 
-      <div class="divider"></div>
-    </section>
+  <!-- ═══ JASNA 2 — Zamknięcie narracyjne ═══ -->
+  <section id="light2" class="section bright">
+    <iframe
+      src="widgets/widget-waves.html"
+      scrolling="no"
+      style="width:100%;height:280px;border:none;display:block;margin-bottom:2em;"
+      id="iframe-waves"
+    ></iframe>
+    <iframe
+      src="widgets/widget-evolution.html"
+      scrolling="no"
+      style="width:100%;height:380px;border:none;display:block;margin-bottom:2.5em;"
+      id="iframe-evo"
+    ></iframe>
+    <p class="closing" data-i18n="light2-close">
+      To nie jest przejście do innego systemu.
+      Te same liczby, ta sama oś.
+      To zmiana perspektywy: z punktów widzianych jako izolowane wartości
+      do punktów wynikających z relacji między nimi.
+    </p>
+  </section>
 
-    <!-- Sekcja: Zanurzenie -->
-    <section id="deep" class="section dark">
-      <h2 data-i18n="kong-deep-title">Zanurzenie w relacji</h2>
-      <p data-i18n="kong-deep-text">
-        Tu zaczynamy delikatnie odsłaniać strukturę, rytmy, eliminacje i intuicje prowadzące w twoją teorię.
-      </p>
+  <!-- ═══ DOWNLOAD (ciemna) ═══ -->
+  <section class="section dark download-section">
+    <h2 data-i18n="download-title">Cztery perspektywy. Jeden mechanizm.</h2>
+    <p data-i18n="download-p">
+      Rytm eliminacyjny, gęstość, rezonans, fala.
+      Każda z tych perspektyw daje pełną odpowiedź na inne pytanie o liczby pierwsze.
+      Razem tworzą spójny obraz strukturalnej teorii liczb.
+    </p>
+    <a href="../download/cztery-filary.pdf" class="download-btn" data-i18n="download-btn">
+      Cztery Filary Porządku Liczbowego — pobierz PDF (140 stron)
+    </a>
+  </section>
 
-      <a href="download/Relational-Congruences.pdf" class="download" data-i18n="kong-download">
-        Pobierz pełne opracowanie
-      </a>
-    </section>
+  <!-- Stopka -->
+  <footer class="footer">
+    <p>
+      <a href="mailto:flamandzki.artur@gmail.com">flamandzki.artur@gmail.com</a>
+      &nbsp;|&nbsp;
+      <a href="https://www.linkedin.com/in/artur-flamandzki-74046918b/" target="_blank">LinkedIn</a>
+    </p>
+    <p data-i18n="footer-rights">© 2025 Flamandzki. Wszelkie prawa zastrzeżone.</p>
+  </footer>
 
-    <!-- Stopka -->
-    <footer class="footer">
-      <p>
-        <a href="mailto:flamandzki.artur@gmail.com">flamandzki.artur@gmail.com</a> |
-        <a href="https://www.linkedin.com/in/artur-flamandzki-74046918b/" target="_blank">LinkedIn</a>
-      </p>
-      <p data-i18n="footer-rights">
-        © 2025 Flamandzki. Wszelkie prawa zastrzeżone.
-      </p>
-    </footer>
-
-  </div>
-
-  <script src="../js/i18n.js"></script>
-
+</div>
+<script src="../js/i18n.js"></script>
 </body>
 </html>

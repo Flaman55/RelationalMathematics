@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f4f4;color:#222;font:13px/1.4 system-ui,sans-serif;padding:10px}
+html,body{height:auto}
+.controls{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.ctrl-group{display:flex;align-items:center;gap:8px}
+label{font-size:12px;color:#666}
+input[type=range]{width:160px;accent-color:#b8952a;cursor:pointer}
+.val{font-size:14px;font-weight:700;color:#b8952a;min-width:26px}
+.wrap{overflow-x:auto;overflow-y:hidden}
+table{border-collapse:collapse;white-space:nowrap}
+td,th{width:34px;height:30px;text-align:center;vertical-align:middle;border:1px solid #ddd}
+th.row-lbl{background:#f4f4f4;color:#888;font-size:11px;font-weight:500;text-align:right;padding-right:8px;white-space:nowrap;width:120px;min-width:120px;border-color:transparent}
+th.row-lbl.merged{color:#b8952a;font-weight:700;font-size:11px}
+td.num{background:#f4f4f4;color:#aaa;font-size:10px;font-weight:400;border-color:#ddd}
+td.wh{background:#b8d4f0}
+td.cm{background:#7fb0e0;color:#fff;font-size:10px;font-weight:700}
+td.pm{background:#b8952a;color:#fff;font-size:11px;font-weight:800}
+td.wp{background:transparent;color:#bbb;font-size:10px;font-weight:500;border-color:#ddd}
+td.sep{height:3px;background:#ddd;border:none;padding:0}
+.inne-list{margin-top:9px;font-size:12px;color:#888}
+.inne-list .inne-key{color:#b8952a;font-weight:700;margin-right:5px}
+.inne-list .inne-num{color:#b8952a;font-weight:800;font-size:13px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:9px;font-size:11px;color:#666}
+.leg{display:flex;align-items:center;gap:5px}
+.leg-sq{width:13px;height:13px;border-radius:2px;flex-shrink:0;border:1px solid #ccc}
+</style>
+</head>
+<body>
+<div class="controls">
+  <div class="ctrl-group">
+    <label id="lbl-range">Zasieg</label>
+    <input type="range" id="rng" min="10" max="60" value="30">
+    <span class="val" id="rng-val">30</span>
+  </div>
+  <div class="ctrl-group">
+    <label id="lbl-waves">Pokazane cykle</label>
+    <input type="range" id="wns" min="1" max="7" value="3">
+    <span class="val" id="wns-val">3</span>
+  </div>
+</div>
+<div class="wrap"><table id="tbl"></table></div>
+<div class="inne-list" id="inne-list"></div>
+<div class="legend" id="legend"></div>
+
+<script>
+const WAVE_PRIMES = [2,3,5,7,11,13,17,19,23,29,31,37,41];
+
+function sieve(N){
+  const a = new Uint8Array(N+1).fill(1); a[0]=a[1]=0;
+  for(let i=2;i*i<=N;i++) if(a[i]) for(let j=i*i;j<=N;j+=i) a[j]=0;
+  return Array.from({length:N-1},(_,i)=>i+2).filter(i=>a[i]);
+}
+
+function getLang(){
+  try{ return window.parent.document.documentElement.lang||'pl'; }catch(e){ return 'pl'; }
+}
+
+function build(N, nw){
+  const allPrimes = sieve(N);
+  const compositeOf = {};
+  allPrimes.forEach(p=>{ for(let m=p*2;m<=N;m+=p) if(!compositeOf[m]) compositeOf[m]=p; });
+
+  const shownPrimes = WAVE_PRIMES.slice(0,nw).filter(p=>p<=N);
+  const shownSet = new Set(shownPrimes);
+  const nums = Array.from({length:N-1},(_,i)=>i+2);
+  const isPL = getLang()==='pl';
+
+  let h='';
+
+  h+='<tr><th class="row-lbl" id="th-axis">'+(isPL?'Os liczbowa':'Number axis')+'</th>';
+  nums.forEach(n=>h+=`<td class="num">${n}</td>`);
+  h+='</tr>';
+
+  shownPrimes.forEach(p=>{
+    h+=`<tr><th class="row-lbl">${isPL?'cykl':'cycle'} ${p}</th>`;
+    nums.forEach(n=>{
+      if(n!==p && n%p===0) h+='<td class="wh"></td>';
+      else h+='<td></td>';
+    });
+    h+='</tr>';
+  });
+
+  h+='<tr><th class="row-lbl" style="border:none"></th>';
+  nums.forEach(()=>h+='<td class="sep"></td>');
+  h+='</tr>';
+
+  const rowLabel = isPL ? 'inne / pierwsze' : 'others / primes';
+  h+=`<tr><th class="row-lbl merged">${rowLabel}</th>`;
+  nums.forEach(n=>{
+    if(compositeOf[n]){
+      h+=`<td class="cm">${compositeOf[n]}</td>`;
+    } else if(shownSet.has(n)){
+      h+=`<td class="wp">${n}</td>`;
+    } else {
+      h+=`<td class="pm">${n}</td>`;
+    }
+  });
+  h+='</tr>';
+
+  document.getElementById('tbl').innerHTML = h;
+
+  const otherPrimes = allPrimes.filter(p => !shownSet.has(p));
+  const inneLabel = isPL ? 'Inne' : 'Others';
+  const inneEl = document.getElementById('inne-list');
+  if(otherPrimes.length){
+    inneEl.innerHTML =
+      `<span class="inne-key">${inneLabel}:</span>` +
+      otherPrimes.map(p=>`<span class="inne-num">${p}</span>`).join(' &middot; ');
+  } else {
+    inneEl.innerHTML = '';
+  }
+
+  const waveLabel  = isPL ? 'Trafienie cyklu'        : 'Wave hit';
+  const compLabel  = isPL ? 'Liczba zlozoona'         : 'Composite';
+  const otherLabel = isPL ? 'Inne (liczba pierwsza)'  : 'Other prime';
+  const waveP      = isPL ? 'Liczba pierwsza z cyklu' : 'Wave prime';
+
+  document.getElementById('legend').innerHTML =
+    `<div class="leg"><div class="leg-sq" style="background:#b8d4f0;border-color:#b8d4f0"></div>${waveLabel}</div>`+
+    `<div class="leg"><div class="leg-sq" style="background:#7fb0e0;border-color:#7fb0e0"></div>${compLabel}</div>`+
+    `<div class="leg"><div class="leg-sq" style="background:#b8952a;border-color:#b8952a"></div>${otherLabel}</div>`+
+    `<div class="leg"><div class="leg-sq" style="background:transparent"></div>${waveP}</div>`;
+}
+
+function applyLang(){
+  const isPL = getLang()==='pl';
+  document.getElementById('lbl-range').textContent = isPL?'Zasieg':'Range';
+  document.getElementById('lbl-waves').textContent = isPL?'Pokazane cykle':'Waves shown';
+}
+
+const rng = document.getElementById('rng');
+const wns = document.getElementById('wns');
+const rv  = document.getElementById('rng-val');
+const wv  = document.getElementById('wns-val');
+
+function fitParent(){
+  if(!window.frameElement) return;
+  window.frameElement.style.height = '10px';
+  requestAnimationFrame(()=>{
+    window.frameElement.style.height = document.documentElement.scrollHeight + 'px';
+  });
+}
+
+rng.addEventListener('input',()=>{ rv.textContent=rng.value; build(+rng.value,+wns.value); fitParent(); });
+wns.addEventListener('input',()=>{ wv.textContent=wns.value; build(+rng.value,+wns.value); fitParent(); });
+
+build(30, 3);
+applyLang();
+fitParent();
+
+try{
+  new MutationObserver(()=>{ build(+rng.value,+wns.value); applyLang(); })
+    .observe(window.parent.document.documentElement,{attributes:true,attributeFilter:['lang']});
+}catch(e){}
+</script>
+</body>
+</html>

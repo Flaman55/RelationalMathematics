@@ -1,31 +1,39 @@
 {
-  "meta-title": "Congruences – Entry Into Structure",
-
+  "kong-title": "Congruences – The Gateway to Structure",
   "nav-home": "Home",
-  "nav-intro": "Introduction",
-  "nav-classic": "Classical View",
-  "nav-transition": "Transition",
-  "nav-deep": "Structure",
-
-  "kong-header": "Congruences: The Beginning of Illusion",
-  "kong-sub": "In classical arithmetic, congruences are remainders. But is the remainder everything?",
-  "kong-sub-2": "Instead of value think rhythm. Instead of number think cycle.",
-
-  "kong-intro-title": "Why are congruences a gateway?",
-  "kong-intro-text": "This section will hold a soft introduction explaining why congruences naturally lead toward deeper structure.",
-
-  "kong-classic-title": "Classical Theory of Congruences",
-  "kong-classic-text": "Here we place classical definitions, examples, and intuitive arithmetic motivation.",
-
-  "kong-classic-img": "Placeholder for modular arithmetic illustration.",
-
-  "kong-transition-title": "What if the remainder is not enough?",
-  "kong-transition-text": "This part gently shifts the interpretation from classical arithmetic toward relational thinking.",
-
-  "kong-deep-title": "Immersion into Relation",
-  "kong-deep-text": "This is where the structural descent begins: rhythms, eliminations, interferences and the first hints of relational depth.",
-
-  "kong-download": "Download full paper",
-
-  "footer-rights": "© 2025 Flamandzki. All rights reserved."
+  "nav-classic": "Classical",
+  "nav-rhythm": "Rhythm",
+  "nav-sieve": "Sieve",
+  "nav-emergence": "Emergence",
+  "hero-title": "Congruences: The Illusion of the Remainder",
+  "hero-sub": "12 ≡ 2 (mod 5). Does this statement say something about the number 12 — or about the way you are looking at it?",
+  "hero-sub2": "Before you answer, step back to the basics. That is where the crack begins.",
+  "dark1-title": "Divide. Count the remainder. Done.",
+  "dark1-p1": "Everyone knows remainders. 17 divided by 5 gives quotient 3 and remainder 2. A congruence is just an elegant notation for the same operation: 17 ≡ 2 (mod 5).",
+  "dark1-p2": "We then claim that this remainder belongs to the number 17. That it is its property. That if you could look inside the number 17 — you would find that 2 sitting there.",
+  "dark1-q": "But what if that remainder belongs to the five — not to the seventeen?",
+  "dark1-img-alt": "Table of remainders n mod k",
+  "light1-title": "Mod 5 is not a filter. It is a rhythm.",
+  "light1-p1": "Imagine that instead of dividing — you are marching. One step, two, three, four, five — and back to the start. Mod 5 is a cycle of period 5.",
+  "light1-p2": "The number 17 is simply the seventeenth step in that march. The remainder 2 does not describe the number 17 — it describes a position within the cycle. A position given by the rhythm, not by the value.",
+  "light1-q": "And what if, instead of one rhythm, you layered several at once?",
+  "light1-img-alt": "Visualisation of the elimination cycle",
+  "dark2-title": "The same sieve. But in a circle.",
+  "dark2-p1": "Arrange the same numbers in a ring instead of a row. Cross out the same multiples of two, three, five. You changed nothing in the algorithm.",
+  "dark2-p2": "And yet something looks different. Primes appear at the same positions every 30 steps — because LCM(2,3,5) = 30. Every full rotation, the same pattern. The algorithm does not assume this. The pattern is simply there.",
+  "dark2-q": "Is this a coincidence — or does it say something about the structure of the number space itself?",
+  "dark2-img-alt": "Sieve of Eratosthenes in circular layout",
+  "light2-title": "Primes do not hide. They emerge.",
+  "light2-p1": "Layer rhythm mod 2 — it eliminates even numbers. Layer mod 3 — it eliminates multiples of three. Each rhythm reaches its own positions on the number line.",
+  "light2-p2": "The positions no rhythm ever reaches — those are prime. Not because they are special. Because no cycle had anything to do there.",
+  "light2-close": "This is not a transition to a different system. The same numbers, the same number line. It is a change of perspective: from points seen as isolated values to points arising from relations between them.",
+  "light2-img-alt": "Elimination waves – where no cycle arrives",
+  "download-title": "Four perspectives. One mechanism.",
+  "download-p": "Elimination rhythm, density, resonance, wave. Each of these perspectives gives a complete answer to a different question about prime numbers. Together they form a coherent picture of structural number theory.",
+  "download-btn": "Four Pillars of Numerical Order — download PDF (140 pages)",
+  "footer-rights": "© 2025 Flamandzki. All rights reserved.",
+  "dark2-crack": "There is something odd here. Classical theory knows that primes are the atoms of factorisation — every composite number decomposes into them uniquely. It also knows that a prime is a number nothing divides. But it never asks why both descriptions point to exactly the same numbers. It uses them interchangeably, as if they were separate tools. What if they are two views of a single mechanism?",
+  "dark1-img-caption": "Each column is one number. A bright cell means that rhythm reaches it. Read column 12: zeros in mod 2 and mod 3. That is 12 = 2 × 3. Column 30: zeros in mod 2, 3 and 5. That is 30 = 2 × 3 × 5. Dark columns with no zeros at all — those are prime.",
+  "split-label-left": "cross out the composites",
+  "split-label-right": "read factorisation from the rhythms"
 }
