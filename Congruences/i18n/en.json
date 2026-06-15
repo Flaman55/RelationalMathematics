@@ -31,6 +31,7 @@
   "download-title": "Four perspectives. One mechanism.",
   "download-p": "Elimination rhythm, density, resonance, wave. Each of these perspectives gives a complete answer to a different question about prime numbers. Together they form a coherent picture of structural number theory.",
   "download-btn": "Four Pillars of Numerical Order — download PDF (140 pages)",
+  "download-pdf-url": "../data/files/Four_Pillars_of_Number_Order_v1.0.pdf",
   "footer-rights": "© 2025 Flamandzki. All rights reserved.",
   "dark2-crack": "There is something odd here. Classical theory knows that primes are the atoms of factorisation — every composite number decomposes into them uniquely. It also knows that a prime is a number nothing divides. But it never asks why both descriptions point to exactly the same numbers. It uses them interchangeably, as if they were separate tools. What if they are two views of a single mechanism?",
   "dark1-img-caption": "Each column is one number. A bright cell means that rhythm reaches it. Read column 12: zeros in mod 2 and mod 3. That is 12 = 2 × 3. Column 30: zeros in mod 2, 3 and 5. That is 30 = 2 × 3 × 5. Dark columns with no zeros at all — those are prime.",
