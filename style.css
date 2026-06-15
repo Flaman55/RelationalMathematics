@@ -201,3 +201,86 @@ a:hover {
     opacity: 1;
   }
 }
+
+/* --- Hero (podstrony) --- */
+
+.hero {
+  padding: 8em 2em;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.6em;
+  margin-bottom: 0.6em;
+}
+
+.hero p {
+  font-size: 1.2em;
+  margin-top: 0.8em;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+/* --- Elementy podstron --- */
+
+.placeholder-img {
+  height: 300px;
+  background: #222;
+  border: 2px dashed #555;
+  border-radius: 8px;
+  margin: 2em auto;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+}
+
+.divider {
+  margin: 3em auto;
+  width: 200px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(to right, #66ccff, #fff, #ffcc33);
+  opacity: 0.8;
+}
+
+.download {
+  color: #66ccff;
+  font-size: 1.2em;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 2em;
+}
+
+.download:hover {
+  text-decoration: underline;
+}
+
+/* --- Sekcja klikalna (pełny pasek) --- */
+
+.section.clickable {
+  position: relative;
+  cursor: pointer;
+  transition: filter 0.25s ease;
+}
+
+.section.clickable:hover {
+  filter: brightness(1.12);
+}
+
+.section-link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  text-decoration: none;
+}
+
+.section.clickable > *:not(.section-link) {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
