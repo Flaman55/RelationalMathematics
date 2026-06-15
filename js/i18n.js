@@ -18,6 +18,10 @@ function loadLang(lang) {
           el.innerHTML = temp.innerHTML;
         }
       });
+      document.querySelectorAll('[data-i18n-href]').forEach(el => {
+        const key = el.getAttribute('data-i18n-href');
+        if (data[key]) el.href = data[key];
+      });
     });
 }
 
